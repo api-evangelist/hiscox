@@ -1,0 +1,286 @@
+aid: hiscox
+name: Hiscox
+review:
+  question: >-
+    Does Hiscox publish a public, self-serve developer portal with downloadable
+    API specifications, and what is its ACORD posture?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: carrier-pc
+  gated: true
+  openapiHarvested: false
+  specsCount: 0
+findings:
+  summary: |
+    Hiscox operates a genuine, branded first-party developer portal at
+    https://developer.hiscox.com/ (HTTP 200), which is more than most
+    property-and-casualty carriers publish. It is not, however, a self-serve
+    developer portal. The catalog page https://developer.hiscox.com/apis
+    (HTTP 200) publicly enumerates three APIs by name, one-line description and
+    status - Eligibility (Active), Quote v4 (Active) and Setup Payment (Active) -
+    but the same page carries a "Login to View All" gate, and
+    https://developer.hiscox.com/documentation (HTTP 200) renders only the words
+    "Login to view our Documentation." The portal homepage states plainly: "To
+    request access to our Quote and Buy APIs, contact our Partnership Managers to
+    start the process." The public FAQ confirms the gate: "Once approved by our
+    Partnership Manager an account will be created for you, which gives you
+    immediate access to SDBX," and "Access is provided to our authorized partners
+    only." Classification: (b) a partner login wall wrapped in a real developer
+    portal shell, not (a) a self-serve developer portal.
+
+    No OpenAPI or Swagger document could be harvested. The FAQ explicitly places
+    the specification inside the gated sandbox - "A complete listing of our APIs
+    and access to the OpenAPI spec Swagger. Swagger facilitates API testing" -
+    so the specs demonstrably exist but are issued only to approved partners.
+    Every unauthenticated spec path probed returned HTTP 404 (see specHunt
+    below). Zero specs saved; the openapi/ directory is deliberately absent.
+
+    A further finding worth recording for the UK sector read: the developer
+    portal is the US small-business arm of the group. Its footer reads
+    "(c) 2026 Hiscox Inc. ... Underwritten by Hiscox Insurance Company Inc., 125
+    S. Wacker Dr., Suite 2080, Chicago, IL 60606", the Eligibility API is scoped
+    to US states, and the maintenance window is quoted in ET. Hiscox's home
+    market - the UK, plus Hiscox London Market writing out of Lloyd's - has no
+    developer surface at all: no developer.hiscox.co.uk (DNS did not resolve),
+    https://www.hiscox.co.uk/api, /developers and /brokers all HTTP 404. The
+    London Market book is broker-placed, consistent with the wider London Market
+    pattern where modernization (Blueprint Two, PPL, Whitespace) is aimed at
+    brokers and syndicates rather than at developers and is therefore invisible
+    from outside.
+
+    Hiscox's most concrete open-standards footprint is ACORD, not REST. On
+    3 July 2025 ACORD and Howden announced that ACORD Standards for digital
+    accounting and invoicing are live and operational in the UK retail insurance
+    market, with Howden using ACORD Solutions Group's ADEPT (ACORD Data Exchange
+    Platform & Translator) as the messaging gateway and Hiscox as its retail
+    insurer partner. The release states directly: "Through the ADEPT receiver
+    portal, Hiscox can respond to the digital invoices Howden sends in real
+    time." ADEPT supports both XML and JSON messaging. This was the first use of
+    ACORD digital accounting standards in the UK outside the specialty and
+    (re)insurance market. Third-party sources also describe Hiscox supporting
+    IVANS Download to US agency management systems; that could not be confirmed
+    from a first-party Hiscox source and is recorded here as unverified.
+  developerPortal:
+    url: https://developer.hiscox.com/
+    httpStatus: 200
+    classification: partner login wall inside a real first-party developer portal shell
+    selfServe: false
+    confirmed: true
+    platform: Drupal (hiscox_developer_radix6 theme)
+    note: >-
+      Public pages are the homepage, /apis catalog, /support, /terms-use and
+      /frequently-asked-questions. /documentation is a login wall. Sandbox
+      (SDBX) credentials are issued by a Hiscox Partnership Manager only.
+  acordPosture:
+    phrase: ACORD digital accounting and invoicing live via ACORD ADEPT receiver portal (Howden, UK retail, July 2025)
+    detail: >-
+      ACORD Standards for digital accounting and invoicing are live in UK retail
+      insurance with Hiscox as the receiving insurer through ACORD Solutions
+      Group's ADEPT gateway (XML and JSON messaging). No ACORD, AL3, ACORD XML,
+      NGDS or "ACORD certified" reference was found anywhere on
+      developer.hiscox.com itself - the ACORD relationship is a market-body and
+      broker-facing integration, not a developer-facing one.
+    acordReferencedOnDeveloperPortal: false
+    ivansAgencyDownload: unverified - claimed by third-party agent guides, not confirmed first-party
+  insuranceVerbs:
+    quote: true
+    bind: true
+    issue: unknown
+    fnol: false
+    audience: partner-only
+    note: >-
+      Quote v4 covers general liability, professional liability, business owner's
+      policy (BOP) and cyber. The portal describes the family as "our Quote and
+      Buy APIs" and Setup Payment "initiates our quick and easy policy payment
+      process", so quote-through-purchase is covered for partner distribution.
+      Policy issuance is not separately documented publicly. No claims or FNOL
+      API is listed anywhere on the public catalog.
+  authModel:
+    scheme: OAuth 2.0
+    transportSecurity: TLS 1.2 only
+    source: https://developer.hiscox.com/frequently-asked-questions
+    quote: >-
+      "What is your API authentication protocol? We authenticate using OAuth 2.0"
+      and "For both SDBX and Production we require TLS 1.2 implementation. We
+      currently ONLY support TLS 1.2."
+    wellKnown:
+      - url: https://developer.hiscox.com/.well-known/openid-configuration
+        httpStatus: 404
+      - url: https://developer.hiscox.com/.well-known/oauth-authorization-server
+        httpStatus: 404
+      - url: https://api.hiscox.com/.well-known/openid-configuration
+        httpStatus: 404
+  webhooksAndEvents:
+    found: false
+    asyncapi: false
+    note: No event catalog, webhook documentation or AsyncAPI surface is published. Absence is the finding.
+  postman:
+    firstPartyWorkspace: false
+    note: >-
+      A public Postman workspace named "Hiscox API" (slug hiscox-api, 2
+      collections, created 2026-06-12) exists under the unverified publisher
+      handle "interstellar-meadow-180167". It is not a Hiscox-operated or
+      verified workspace and is not recorded as a company property.
+  graphql:
+    found: false
+  grpc:
+    found: false
+  sandbox:
+    name: SDBX
+    public: false
+    note: >-
+      Production-like sandbox, free to approved partners, available at all times
+      except the Monday/Thursday 15:00-18:00 ET maintenance window. Credentials
+      require Partnership Manager approval.
+  transports:
+    - protocol: REST
+      scheme: https
+      documented: true
+      note: >-
+        FAQ states "All of our APIs are REST" and "We support both XML and JSON
+        formats." No public base URL is documented; api.hiscox.com resolves but
+        returns HTTP 404 at the root.
+    - protocol: SOAP
+      documented: false
+      note: FAQ explicitly rules SOAP out - "All of our APIs are REST".
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket or streaming surface is referenced anywhere on the portal.
+    - protocol: ACORD messaging
+      documented: true
+      note: >-
+        ACORD digital accounting/invoicing messages exchanged via ACORD Solutions
+        Group ADEPT (XML and JSON), broker-to-carrier, not developer-accessible.
+probes:
+  - url: https://developer.hiscox.com/
+    httpStatus: 200
+    note: Real first-party developer portal. Nav - APIs, Documentation, Support, Login.
+  - url: https://developer.hiscox.com/apis
+    httpStatus: 200
+    note: Public API catalog; three Active APIs named. Carries "Login to View All".
+  - url: https://developer.hiscox.com/documentation
+    httpStatus: 200
+    note: Login wall - "Login to view our Documentation."
+  - url: https://developer.hiscox.com/frequently-asked-questions
+    httpStatus: 200
+    note: Source of the auth model, sandbox policy, REST/XML/JSON and gated-Swagger statements.
+  - url: https://developer.hiscox.com/support
+    httpStatus: 200
+    note: >-
+      Carries "Partner With Us - Let's get you onboard with our APIs" plus an
+      obfuscated mailto link.
+  - url: https://developers.hiscox.com
+    httpStatus: '000'
+    note: DNS did not resolve.
+  - url: https://docs.hiscox.com
+    httpStatus: '000'
+    note: DNS did not resolve.
+  - url: https://api.hiscox.com
+    httpStatus: 404
+    note: Host resolves and serves JSON, but the root returns 404. No public API surface.
+  - url: https://www.hiscox.com/developers
+    httpStatus: 403
+  - url: https://www.hiscox.com/api
+    httpStatus: 403
+  - url: https://www.hiscox.com/developer
+    httpStatus: 403
+  - url: https://www.hiscox.com/partners
+    httpStatus: 403
+  - url: https://www.hiscox.com/integrations
+    httpStatus: 403
+    note: >-
+      www.hiscox.com returns 403 to non-browser clients including the site root,
+      so these 403s reflect bot mitigation, not necessarily missing pages.
+  - url: https://www.hiscox.co.uk/
+    httpStatus: 200
+  - url: https://www.hiscox.co.uk/api
+    httpStatus: 404
+  - url: https://www.hiscox.co.uk/developers
+    httpStatus: 404
+  - url: https://www.hiscox.co.uk/brokers
+    httpStatus: 404
+  - url: https://developer.hiscox.co.uk
+    httpStatus: '000'
+    note: DNS did not resolve. No UK-side developer surface.
+  - url: https://sandbox.hiscox.com
+    httpStatus: '000'
+  - url: https://apis.hiscox.com
+    httpStatus: '000'
+  - url: https://partners.hiscox.com
+    httpStatus: '000'
+  - url: https://www.hiscoxlondonmarket.com/
+    httpStatus: 200
+    note: London Market marketing site; no developer or API surface.
+  - url: https://github.com/hiscox
+    httpStatus: 200
+    note: >-
+      Real Hiscox GitHub organization, 18 public repos - all infrastructure and
+      DevOps (Puppet modules, Terraform providers, Azure/Dynatrace tooling).
+      No API definitions, SDKs or client libraries.
+specHunt:
+  attempts:
+    - url: https://developer.hiscox.com/openapi.json
+      httpStatus: 404
+    - url: https://developer.hiscox.com/openapi.yaml
+      httpStatus: 404
+    - url: https://developer.hiscox.com/swagger.json
+      httpStatus: 404
+    - url: https://developer.hiscox.com/api-docs
+      httpStatus: 404
+    - url: https://developer.hiscox.com/spec
+      httpStatus: 404
+    - url: https://developer.hiscox.com/redoc
+      httpStatus: 404
+    - url: https://developer.hiscox.com/api/openapi.json
+      httpStatus: 404
+    - url: https://developer.hiscox.com/sitemap.xml
+      httpStatus: 404
+  result: >-
+    No OpenAPI or Swagger document is retrievable without partner credentials.
+    Zero specs saved verbatim; the openapi/ directory is intentionally omitted.
+sources:
+  - url: https://developer.hiscox.com/
+    type: Documentation
+    fetched: '2026-07-25'
+    httpStatus: 200
+    note: >-
+      "The Hiscox Developer Portal is a foundational piece of our API strategy...
+      To request access to our Quote and Buy APIs, contact our Partnership
+      Managers to start the process."
+  - url: https://developer.hiscox.com/apis
+    type: APIReference
+    fetched: '2026-07-25'
+    httpStatus: 200
+    note: Public catalog naming Eligibility, Quote v4 and Setup Payment, all Status Active.
+  - url: https://developer.hiscox.com/frequently-asked-questions
+    type: Documentation
+    fetched: '2026-07-25'
+    httpStatus: 200
+    note: OAuth 2.0, TLS 1.2 only, REST only, XML and JSON, gated SDBX with Swagger.
+  - url: https://www.acord.org/ACORD-about/acord-news/2025/07/03/acord-and-howden-pioneer-the-adoption-of-digital-invoicing-standards-in-the-uk-retail-insurance-market
+    type: PressRelease
+    fetched: '2026-07-25'
+    note: ACORD newsroom item naming Hiscox as the ADEPT receiver; ACORD site returned 403 to direct fetch, content confirmed via the PR Newswire mirror below.
+  - url: https://www.prnewswire.co.uk/news-releases/acord-and-howden-pioneer-the-adoption-of-digital-invoicing-standards-in-the-uk-retail-insurance-market-302497211.html
+    type: PressRelease
+    fetched: '2026-07-25'
+    note: >-
+      3 July 2025. "Through the ADEPT receiver portal, Hiscox can respond to the
+      digital invoices Howden sends in real time." ADEPT supports XML and JSON.
+  - url: https://www.hiscoxgroup.com/about-hiscox
+    type: Website
+    fetched: '2026-07-25'
+    httpStatus: 200
+    note: Roots to 1901 in the Lloyd's market, Bermuda-headquartered, LSE-listed, 13 countries, 31 offices, 3,000+ staff.
+actions:
+  apisYmlCreated: true
+  openapiDirectoryCreated: false
+  reason: >-
+    Hiscox is recorded as an honest partner-gated carrier. Three real,
+    first-party, publicly named APIs are listed in apis.yml with the portal
+    catalog as their humanURL and the login-walled documentation page as their
+    APIReference. No OpenAPI pointer is present because no specification is
+    publicly retrievable, and none was fabricated.
