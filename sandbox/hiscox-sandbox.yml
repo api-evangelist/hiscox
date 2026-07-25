@@ -1,0 +1,69 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.hiscox.com/frequently-asked-questions
+name: SDBX
+public: false
+gated: true
+cost: free to approved Hiscox partners
+description: >-
+  Hiscox operates a named, production-like sandbox environment called SDBX,
+  described on the public developer FAQ. It is the environment partners test API
+  integrations against before production, and it is where the OpenAPI/Swagger
+  definitions for the Eligibility, Quote v4 and Setup Payment APIs are actually
+  published - behind the partner login. Access is not self-serve: a Hiscox
+  Partnership Manager must approve the partnership, after which an account is
+  created that grants immediate SDBX access.
+access:
+  self_serve: false
+  approval: Hiscox Partnership Manager
+  audience: authorized Hiscox partners only
+  credential_recovery: >-
+    Login page "Reset your password" tab, or contact the Partnership Manager to
+    re-issue account credentials.
+  contacts:
+  - hiscox.partneroperations@hiscox.com
+  - partnercontact@hiscox.com
+availability:
+  always_on: true
+  exception: Hiscox maintenance window
+  maintenance_window:
+    days:
+    - Monday
+    - Thursday
+    time: 15:00-18:00
+    timezone: ET
+    note: >-
+      The maintenance window is displayed as a standing banner on every public
+      page of developer.hiscox.com: "Please note: the Hiscox maintenance window
+      is every Monday and Thursday from 3-6 PM ET." It applies to the sandbox and
+      is the only recurring availability commitment Hiscox publishes.
+contents:
+  documentation: true
+  openapi_swagger: true
+  interactive_testing: true
+  evidence: >-
+    FAQ: "What functionality is available in the sandbox? A complete listing of
+    our APIs and access to the OpenAPI spec Swagger. Swagger facilitates API
+    testing."
+test_data:
+  published: false
+  note: >-
+    No magic test values, test policy numbers, test payment instruments or
+    fixture triggers are published on any public Hiscox page. Any such values
+    live inside the gated SDBX documentation. Nothing was invented here.
+transport:
+  tls_minimum: '1.2'
+  note: SDBX enforces the same TLS 1.2-only policy as production.
+evidence:
+- source: https://developer.hiscox.com/frequently-asked-questions
+  quotes:
+  - >-
+    "Where do I test my application? Our portal provides a production like
+    environment called Sandbox (SDBX) that allows you to test your API
+    integrations."
+  - >-
+    "Is Sandbox always available? The Sandbox environment is available at all
+    times, except during the Hiscox maintenance window, which occurs every Monday
+    and Thursday from 3:00-6:00 PM ET."
+  - '"What does it cost me? As a Hiscox partner, SDBX is provided free of cost."'
+  - '"Who can access the sandbox? Access is provided to our authorized partners only."'

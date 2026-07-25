@@ -1,0 +1,112 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.hiscox.com/terms-use
+summary: >-
+  Hiscox publishes no API changelog, no status page, no deprecation policy and no
+  SLA. What it does publish is a standing maintenance window on every developer
+  portal page, product-name versioning ("Quote v4"), and an API Terms of Use that
+  reserves the right to update, modify, suspend or discontinue the API Services
+  at any time, with or without notice, and places the cost of adapting on the
+  partner. That is the lifecycle contract, and it is a weak one - recorded here
+  as published rather than inferred.
+versioning:
+  scheme: version-in-product-name
+  current:
+  - api: Hiscox Quote API
+    version: v4
+  - api: Hiscox Eligibility API
+    version: unversioned in public catalog
+  - api: Hiscox Setup Payment API
+    version: unversioned in public catalog
+  policy_url: null
+  docs: https://developer.hiscox.com/apis
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  notice_period: none guaranteed
+  evidence: >-
+    API Terms of Use, clause 7 (No Support; Updates): "You acknowledge that we
+    may update or modify the API Services from time to time and at our sole
+    discretion... Updates may adversely affect how Your Applications communicate
+    with the Hiscox Platform. You are required to make any changes to Your
+    Applications that are required for integration as a result of such Update at
+    Your sole cost and expense." Clause 12 adds: "Hiscox may, at any time and
+    from time to time, modify or discontinue, temporarily or permanently, the API
+    Services, or any portion thereof, with or without notice."
+status_page:
+  url: null
+  published: false
+  probes:
+  - url: https://status.hiscox.com
+    status: '000'
+    note: DNS did not resolve.
+  - url: https://developer.hiscox.com/status
+    status: 404
+maintenance_window:
+  days:
+  - Monday
+  - Thursday
+  time: 15:00-18:00
+  timezone: ET
+  scope: SDBX sandbox and production
+  published_on: every public page of https://developer.hiscox.com/
+  evidence: >-
+    Standing site banner: "Please note: the Hiscox maintenance window is every
+    Monday and Thursday from 3-6 PM ET." Confirmed again in the FAQ answer on
+    sandbox availability.
+sla:
+  url: null
+  uptime_target: null
+  warranty: >-
+    Expressly disclaimed. API Terms of Use, clause 10 (No Warranties): the API
+    Services are provided "AS IS" and "AS AVAILABLE" with no warranty that they
+    "will... operate without interruption, or be secure, accurate, complete, free
+    of harmful code, or error-free."
+  liability_cap: >-
+    Aggregate liability capped at amounts paid to Hiscox for use of the API
+    Services in the six months before the cause of action; claims must be brought
+    within six months.
+  governing_law: State of New York; binding AAA arbitration in New York, NY.
+change_log:
+  url: null
+  published: false
+  note: >-
+    Hiscox publishes no dated API changelog or release-notes feed; /changelog and
+    /release-notes on the developer portal both return 404. The dated API
+    milestones below are harvested from first-party Hiscox Group press releases,
+    not from a changelog, and no ChangeLog pointer is wired.
+api_milestones:
+- date: '2023-03-03'
+  event: >-
+    Hiscox UK launches a full-cycle broker extranet - described as the first
+    full-cycle digital trading extranet built by an insurer that supports
+    integration into a broker's Acturis back office. Quote in seconds, new
+    business, mid-term adjustments and renewals; PI Combined, CyberClear and
+    Office Combined; customer data downloads straight into Acturis.
+  source: https://www.hiscoxgroup.com/news/press-releases/2023/03-03-23
+- date: '2025-06-30'
+  event: >-
+    Hiscox London Market launches the Cargo API for small cargo and stock
+    throughput risks - near-instant quote and bind, 100% Hiscox Syndicate 33
+    security, US$5m limit, risk models and software coded in-house. Price Forbes
+    is the first broker partner and built the front end.
+  source: https://www.hiscoxgroup.com/news/press-releases/2025/30-06-25
+- date: '2025-07-03'
+  event: >-
+    ACORD Standards for digital accounting and invoicing go live in the UK retail
+    insurance market with Hiscox as the receiving insurer, responding in real
+    time to Howden's digital invoices through the ACORD Solutions Group ADEPT
+    receiver portal.
+  source: https://www.prnewswire.co.uk/news-releases/acord-and-howden-pioneer-the-adoption-of-digital-invoicing-standards-in-the-uk-retail-insurance-market-302497211.html
+- date: '2025-08-06'
+  event: >-
+    Hiscox agrees to acquire Corix Insurance Services, LLC and Vouch Insurance
+    Company from Vouch, Inc., explicitly to gain "new cutting-edge US broker
+    technology to accelerate the ongoing digitization of Hiscox's US broker
+    platform", with a multi-year distribution deal alongside.
+  source: https://www.hiscoxgroup.com/news/press-releases/2025/06-08-25-1
+deprecated_operations: []
+note_on_derivation: >-
+  No OpenAPI is publicly retrievable, so no deprecated operations could be
+  derived from a specification.

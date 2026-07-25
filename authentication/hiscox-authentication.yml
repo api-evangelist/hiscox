@@ -1,0 +1,78 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.hiscox.com/frequently-asked-questions
+docs:
+- https://developer.hiscox.com/frequently-asked-questions
+- https://developer.hiscox.com/terms-use
+summary:
+  types:
+  - oauth2
+  - apiKey
+  transport_security: TLS 1.2 only
+  derived_from_openapi: false
+  note: >-
+    No OpenAPI or Swagger document is publicly retrievable, so this profile is
+    searched from the provider's own public FAQ and API Terms of Use rather than
+    derived from a specification. Flow names, token endpoints, scopes and the
+    API-key parameter location are not published and were not inferred.
+schemes:
+- name: oauth2
+  type: oauth2
+  documented: true
+  flows: unknown
+  authorization_url: unknown
+  token_url: unknown
+  scopes_published: false
+  source: https://developer.hiscox.com/frequently-asked-questions
+  evidence: >-
+    FAQ, Security section: "What is your API authentication protocol? We
+    authenticate using OAuth 2.0"
+- name: api_key
+  type: apiKey
+  documented: true
+  in: unknown
+  parameter_name: unknown
+  source: https://developer.hiscox.com/terms-use
+  evidence: >-
+    API Terms of Use, clause 4 (API Key): "Once registered, Hiscox makes the API
+    Services available to You electronically, requiring an API key for You to
+    access and use the API Services." Issued on partner registration; the holder
+    must keep it confidential and report suspected compromise to Hiscox.
+transport:
+  tls_minimum: '1.2'
+  tls_maximum: '1.2'
+  environments:
+  - SDBX (sandbox)
+  - Production
+  evidence: >-
+    FAQ, Security section: "For both SDBX and Production we require TLS 1.2
+    implementation" and "We currently ONLY support TLS 1.2."
+  observed:
+  - host: api.hiscox.com
+    negotiated_protocol: TLSv1.2
+    probed: '2026-07-25'
+    note: Live TLS handshake against the gateway host corroborates the TLS 1.2 policy.
+credential_issuance:
+  self_serve: false
+  process: >-
+    Credentials are not self-serve. A Hiscox Partnership Manager must approve the
+    commercial partnership first; on approval an account is created that grants
+    immediate access to the SDBX sandbox. Lost credentials are recovered through
+    the Login page password reset, or by contacting the Partnership Manager.
+  contacts:
+  - hiscox.partneroperations@hiscox.com
+  - partnercontact@hiscox.com
+  evidence:
+  - >-
+    FAQ, Registration section: "Once approved by our Partnership Manager an
+    account will be created for you, which gives you immediate access to SDBX"
+    and "Access is provided to our authorized partners only."
+  - >-
+    API Terms of Use, clause 3 (Enrollment): "In order to access and use the API
+    Services, You must be approved by Hiscox and registered in Hiscox's API
+    Portal."
+gaps:
+- Token endpoint and OAuth 2.0 grant type are not published.
+- No scope or permission reference is published, so scopes/ is intentionally absent.
+- API-key transport (header vs query) is not published.
+- No /.well-known/oauth-authorization-server or /.well-known/openid-configuration is served (all 404).

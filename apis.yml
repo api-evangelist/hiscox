@@ -2,31 +2,28 @@ aid: hiscox
 url: https://raw.githubusercontent.com/api-evangelist/hiscox/refs/heads/main/apis.yml
 name: Hiscox
 kind: company
-description: >-
-  Hiscox Ltd is a diversified international specialist insurance and reinsurance
-  group with roots in the Lloyd's of London market dating to 1901, domiciled in
-  Bermuda and listed on the London Stock Exchange, operating from 31 offices
-  across 13 countries. Its home market is the United Kingdom, where it underwrites
-  through three segments: Hiscox Retail (small business, professional and
-  specialty personal lines sold direct and through brokers in the UK, Europe and
-  the USA), Hiscox London Market (larger and more complex specialty risks written
-  out of London for a worldwide client base, including marine, energy, aviation,
-  specialty property and casualty, and cyber), and Hiscox Re & ILS (reinsurance
-  and insurance-linked securities). Its API posture is partner-gated rather than
-  public. Hiscox operates a genuine first-party developer portal at
-  developer.hiscox.com serving its US small-business arm, and that portal
-  publicly enumerates three active APIs - Eligibility, Quote v4 and Setup Payment
-  - but every reference document, sandbox credential and OpenAPI/Swagger file
-  sits behind a login that is only issued after a Hiscox Partnership Manager
-  approves a commercial partnership. There is no self-serve signup, no
-  downloadable specification, no public claims or FNOL API, and no developer
-  surface at all on the UK or London Market side of the group, where business is
-  placed through brokers. Hiscox's most concrete open-standards footprint is
-  ACORD rather than REST: in July 2025 ACORD and Howden announced that ACORD
-  Standards for digital accounting and invoicing went live in the UK retail
-  insurance market with Hiscox as the receiving insurer, responding in real time
-  to Howden's digital invoices through the ACORD Solutions Group ADEPT (ACORD
-  Data Exchange Platform & Translator) receiver portal.
+description: 'Hiscox Ltd is a diversified international specialist insurance and reinsurance group with
+  roots in the Lloyd''s of London market dating to 1901, domiciled in Bermuda and listed on the London
+  Stock Exchange, operating from 31 offices across 13 countries. Its home market is the United Kingdom,
+  where it underwrites through three segments: Hiscox Retail (small business, professional and specialty
+  personal lines sold direct and through brokers in the UK, Europe and the USA), Hiscox London Market
+  (larger and more complex specialty risks written out of London for a worldwide client base, including
+  marine, energy, aviation, specialty property and casualty, and cyber), and Hiscox Re & ILS (reinsurance
+  and insurance-linked securities). Its API posture is partner-gated rather than public. Hiscox operates
+  a genuine first-party developer portal at developer.hiscox.com serving its US small-business arm, and
+  that portal publicly enumerates three active APIs - Eligibility, Quote v4 and Setup Payment - but every
+  reference document, sandbox credential and OpenAPI/Swagger file sits behind a login that is only issued
+  after a Hiscox Partnership Manager approves a commercial partnership. There is no self-serve signup,
+  no downloadable specification and no public claims or FNOL API. The group does ship APIs outside that
+  portal: Hiscox London Market launched a Cargo API for small cargo and stock throughput risks in June
+  2025, built in-house and distributed through broker partners as coverholders, but it has no developer
+  portal listing, no documentation and no specification - it is announced through the newsroom and reached
+  through a broker partnership. Authentication is OAuth 2.0 plus a partner-issued API key over TLS 1.2
+  only, all APIs are REST, and both XML and JSON are supported. Hiscox''s most concrete open-standards
+  footprint is ACORD rather than REST: in July 2025 ACORD and Howden announced that ACORD Standards for
+  digital accounting and invoicing went live in the UK retail insurance market with Hiscox as the receiving
+  insurer, responding in real time to Howden''s digital invoices through the ACORD Solutions Group ADEPT
+  (ACORD Data Exchange Platform & Translator) receiver portal.'
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
@@ -41,18 +38,20 @@ tags:
 - Quote
 - ACORD
 - Carrier
+- Cargo
+- Marine
+- Payments
+- API Gateway
 created: '2026-07-25'
 modified: '2026-07-25'
 specificationVersion: '0.19'
 apis:
 - aid: hiscox:hiscox-eligibility-api
   name: Hiscox Eligibility API
-  description: >-
-    Partner-facing eligibility lookup that returns the list of US states and the
-    Hiscox products offered by profession, used to determine whether a risk can
-    be quoted before a quote is requested. Listed as Active on the public Hiscox
-    Developer Portal API catalog; reference documentation and the OpenAPI/Swagger
-    definition are behind the partner login and were not retrievable.
+  description: Partner-facing eligibility lookup that returns the list of US states and the Hiscox products
+    offered by profession, used to determine whether a risk can be quoted before a quote is requested.
+    Listed as Active on the public Hiscox Developer Portal API catalog; reference documentation and the
+    OpenAPI/Swagger definition are behind the partner login and were not retrievable.
   humanURL: https://developer.hiscox.com/apis
   tags:
   - Eligibility
@@ -65,13 +64,11 @@ apis:
     url: https://developer.hiscox.com/documentation
 - aid: hiscox:hiscox-quote-api
   name: Hiscox Quote API v4
-  description: >-
-    Partner-facing quoting API that returns a competitive general liability,
-    professional liability, business owner's policy (BOP) and/or cyber quote for
-    purchase via partner portals or APIs. Listed as Active on the public Hiscox
-    Developer Portal API catalog; access is granted only after approval by a
-    Hiscox Partnership Manager, and the reference documentation and
-    OpenAPI/Swagger definition are behind the partner login.
+  description: Partner-facing quoting API that returns a competitive general liability, professional liability,
+    business owner's policy (BOP) and/or cyber quote for purchase via partner portals or APIs. Listed
+    as Active on the public Hiscox Developer Portal API catalog; access is granted only after approval
+    by a Hiscox Partnership Manager, and the reference documentation and OpenAPI/Swagger definition are
+    behind the partner login.
   humanURL: https://developer.hiscox.com/apis
   tags:
   - Quote
@@ -85,12 +82,10 @@ apis:
     url: https://developer.hiscox.com/documentation
 - aid: hiscox:hiscox-setup-payment-api
   name: Hiscox Setup Payment API
-  description: >-
-    Partner-facing payment API that initiates the Hiscox policy payment process,
-    completing the quote-to-buy flow for partner-distributed small business
-    policies. Listed as Active on the public Hiscox Developer Portal API catalog;
-    reference documentation and the OpenAPI/Swagger definition are behind the
-    partner login.
+  description: Partner-facing payment API that initiates the Hiscox policy payment process, completing
+    the quote-to-buy flow for partner-distributed small business policies. Listed as Active on the public
+    Hiscox Developer Portal API catalog; reference documentation and the OpenAPI/Swagger definition are
+    behind the partner login.
   humanURL: https://developer.hiscox.com/apis
   tags:
   - Payments
@@ -101,9 +96,35 @@ apis:
     url: https://developer.hiscox.com/apis
   - type: APIReference
     url: https://developer.hiscox.com/documentation
+- aid: hiscox:hiscox-cargo-api
+  name: Hiscox Cargo API
+  description: Hiscox London Market API-based solution for underwriting small cargo and stock throughput
+    risks, launched 30 June 2025 and distributed through broker partners acting as coverholders. Provides
+    near-instant quote and bind for every risk within underwriting appetite, offering transit, stock only
+    and stock throughput cover with a US$5 million limit and 100% Hiscox Syndicate 33 security. Hiscox
+    developed the risk rating models, policy wordings and software coding in-house; Price Forbes was the
+    first broker partner and built the front end. There is no developer portal listing, no public documentation
+    and no specification for this API - it is announced only through the Hiscox Group newsroom and reached
+    through a broker partnership.
+  humanURL: https://www.hiscoxgroup.com/news/press-releases/2025/30-06-25
+  tags:
+  - Cargo
+  - Marine
+  - Stock Throughput
+  - Quote
+  - Bind
+  - London Market
+  - Lloyd's of London
+  properties:
+  - type: PressRelease
+    url: https://www.hiscoxgroup.com/news/press-releases/2025/30-06-25
 common:
+- type: DomainSecurity
+  url: security/hiscox-domain-security.yml
 - type: Website
   url: https://www.hiscoxgroup.com/
+- type: DeveloperPortal
+  url: https://developer.hiscox.com/
 - type: Documentation
   url: https://developer.hiscox.com/
 - type: APIReference
@@ -122,6 +143,29 @@ common:
   url: https://github.com/hiscox
 - type: LinkedIn
   url: https://www.linkedin.com/company/hiscox
+- type: GettingStarted
+  name: Partner With Us - request access to the Quote and Buy APIs
+  url: https://developer.hiscox.com/support
+- type: Blog
+  url: https://www.hiscoxgroup.com/news/blog
+- type: Compliance
+  name: Cyber Essentials Plus accreditation (UK Government backed scheme, annually retested)
+  url: https://www.hiscoxgroup.com/news/blog/hiscox-gains-cyber-essentials-plus-accreditation
+- type: Authentication
+  url: authentication/hiscox-authentication.yml
+- type: Conventions
+  url: conventions/hiscox-conventions.yml
+- type: Sandbox
+  name: SDBX - production-like sandbox, free to approved partners
+  url: sandbox/hiscox-sandbox.yml
+- type: Lifecycle
+  url: lifecycle/hiscox-lifecycle.yml
+- type: Conformance
+  url: conformance/hiscox-conformance.yml
+- type: Packages
+  url: packages/hiscox-packages.yml
+- type: LLMsTxt
+  url: llms/hiscox-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

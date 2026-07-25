@@ -1,0 +1,94 @@
+generated: '2026-07-25'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+note: >-
+  The gateway host api.hiscox.com and the two retail websites were probed by hand
+  in the same round because they are not carried as baseURLs in apis.yml (Hiscox
+  documents no public base URL). The API gateway is the only Hiscox host that
+  caps at TLS 1.2, which corroborates the developer FAQ statement that TLS 1.2 is
+  the only supported version for SDBX and Production.
+hosts:
+- host: www.hiscoxgroup.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 13 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: developer.hiscox.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  1 17:16:49 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: api.hiscox.com
+  role: API gateway (Apigee)
+  https: true
+  tls_version: TLSv1.2
+  tls_max_negotiated: TLSv1.2
+  cert_expires: Nov 22 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 86400
+  note: >-
+    Serves an Apigee proxy fault on every unauthenticated path; no routable
+    public proxy. HSTS max-age of 86400 is well below the 31536000 used on the
+    marketing hosts.
+- host: www.hiscox.com
+  role: US retail website
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 18 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: www.hiscox.co.uk
+  role: UK retail website
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 14 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+domains:
+- domain: hiscoxgroup.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
+- domain: hiscox.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: hiscox.co.uk
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+  note: >-
+    The UK domain enforces DMARC p=reject while the US/global hiscox.com domain
+    is still at p=none (monitor only), and the group corporate domain
+    hiscoxgroup.com publishes neither SPF nor DMARC.
+security_txt:
+  published: false
+  probed:
+  - https://developer.hiscox.com/.well-known/security.txt
+  - https://www.hiscox.com/.well-known/security.txt
+  - https://www.hiscox.co.uk/.well-known/security.txt
+  - https://www.hiscoxgroup.com/.well-known/security.txt
+  - https://api.hiscox.com/.well-known/security.txt
+  result: all 404
+vulnerability_disclosure:
+  published: false
+  probed:
+  - https://hackerone.com/hiscox
+  - https://bugcrowd.com/hiscox
+  - https://www.hiscoxgroup.com/responsible-disclosure
+  - https://www.hiscoxgroup.com/security
+  - https://www.hiscoxgroup.com/vulnerability-disclosure
+  result: >-
+    All 404 (the www.hiscox.com equivalents return 403 to non-browser clients, so
+    they are inconclusive rather than confirmed absent). No coordinated
+    vulnerability disclosure programme, bug bounty or security contact could be
+    found for a company that itself sells cyber insurance and publishes an annual
+    Cyber Readiness Report.

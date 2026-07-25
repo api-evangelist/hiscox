@@ -1,0 +1,146 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  https://developer.hiscox.com/frequently-asked-questions plus first-party Hiscox
+  Group press releases and the ACORD/Howden announcement
+summary: >-
+  Hiscox's conformance profile is a carrier profile, not a platform profile. The
+  cross-cutting web standards it asserts publicly are minimal but real - REST,
+  OAuth 2.0, TLS 1.2, XML and JSON - and its strongest machine-readable
+  standards footprint is the insurance industry body's, not the web's: ACORD
+  digital accounting and invoicing, live in UK retail insurance through the ACORD
+  Solutions Group ADEPT gateway. Everything asserted below is sourced; nothing is
+  inferred from an unretrievable specification.
+standards:
+- id: rest
+  conforms: true
+  evidence: 'Developer FAQ: "All of our APIs are REST".'
+  source: https://developer.hiscox.com/frequently-asked-questions
+- id: soap
+  conforms: false
+  evidence: The same FAQ answer rules SOAP out explicitly.
+- id: oauth2
+  conforms: true
+  evidence: 'Developer FAQ: "We authenticate using OAuth 2.0". Flows and endpoints are not published.'
+  source: https://developer.hiscox.com/frequently-asked-questions
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any Hiscox host (all 404).
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns 404 on developer.hiscox.com and api.hiscox.com.
+- id: tls-1.2
+  conforms: true
+  evidence: >-
+    'For both SDBX and Production we require TLS 1.2 implementation. We currently
+    ONLY support TLS 1.2.' A live handshake against api.hiscox.com negotiated
+    TLSv1.2 on 2026-07-25.
+- id: tls-1.3
+  conforms: false
+  evidence: >-
+    The gateway host negotiates TLS 1.2 and the FAQ states TLS 1.2 is the only
+    supported version. The marketing hosts developer.hiscox.com and
+    www.hiscoxgroup.com do serve TLS 1.3, but the API surface does not.
+- id: openapi
+  conforms: partial
+  evidence: >-
+    OpenAPI/Swagger documents demonstrably exist - 'A complete listing of our APIs
+    and access to the OpenAPI spec Swagger' is listed as SDBX functionality - but
+    they are issued only to approved partners. No public retrieval path exists;
+    every spec path probed returned 404.
+  source: https://developer.hiscox.com/frequently-asked-questions
+- id: json
+  conforms: true
+  evidence: 'FAQ: "We support both XML and JSON formats."'
+- id: xml
+  conforms: true
+  evidence: 'FAQ: "We support both XML and JSON formats."'
+- id: rfc9457-problem-details
+  conforms: unknown
+  evidence: No public error reference is published.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Hiscox host probed.
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is published anywhere.
+- id: graphql
+  conforms: false
+- id: grpc
+  conforms: false
+- id: acord-digital-accounting-invoicing
+  conforms: true
+  evidence: >-
+    ACORD and Howden announced on 3 July 2025 that ACORD Standards for digital
+    accounting and invoicing are live and operational in the UK retail insurance
+    market, with Hiscox as the receiving insurer. "Through the ADEPT receiver
+    portal, Hiscox can respond to the digital invoices Howden sends in real
+    time." ADEPT (ACORD Data Exchange Platform & Translator) supports both XML
+    and JSON messaging. This was the first use of ACORD digital accounting
+    standards in the UK outside the specialty and (re)insurance market.
+  source: https://www.prnewswire.co.uk/news-releases/acord-and-howden-pioneer-the-adoption-of-digital-invoicing-standards-in-the-uk-retail-insurance-market-302497211.html
+  note: >-
+    Broker-to-carrier and market-body facing. No ACORD, AL3, ACORD XML or NGDS
+    reference appears anywhere on developer.hiscox.com - the ACORD relationship
+    is not developer-facing.
+- id: acturis-broker-integration
+  conforms: true
+  evidence: >-
+    The Hiscox UK broker extranet, launched 3 March 2023, is described as "the
+    first full cycle digital trading extranet built by an insurer that supports
+    integration into broker's Acturis back office", with customer data downloading
+    straight onto Acturis to remove re-keying.
+  source: https://www.hiscoxgroup.com/news/press-releases/2023/03-03-23
+  note: Agency/broker back-office data exchange, not a public API standard.
+- id: fhir
+  conforms: false
+- id: scim
+  conforms: false
+- id: odata
+  conforms: false
+- id: json-api
+  conforms: false
+- id: fapi
+  conforms: false
+certifications:
+- name: Cyber Essentials Plus
+  scheme: UK Government (NCSC) backed Cyber Essentials scheme
+  status: accredited
+  since: '2018-06-08'
+  basic_scheme_since: '2016-09'
+  reassessment: annual external testing
+  evidence: >-
+    "Following a two day test involving external auditors examining documentation
+    and processes around Hiscox's cyber security, and technical experts conducting
+    penetration tests on its systems, Hiscox is now a Cyber Essentials Plus
+    accredited firm... Ongoing accreditation under the Cyber Essentials Plus
+    scheme means Hiscox will continue to be tested annually."
+  source: https://www.hiscoxgroup.com/news/blog/hiscox-gains-cyber-essentials-plus-accreditation
+regulatory:
+- regime: Lloyd's of London
+  detail: Hiscox Syndicate 33 (and Syndicate 6104) at Lloyd's; the Cargo API writes 100% Hiscox Syndicate 33 security.
+  source: https://www.hiscoxgroup.com/news/press-releases/2025/30-06-25
+- regime: US state insurance regulation
+  detail: >-
+    Hiscox Insurance Company Inc. (NAIC Number 10200) is a Chicago, IL domiciled
+    insurer admitted or licensed to do business in all 50 states and the District
+    of Columbia. Hiscox Inc. is a Delaware corporation headquartered in New York
+    and a licensed insurance intermediary for admitted and surplus lines business.
+  source: https://developer.hiscox.com/terms-use
+- regime: US export control
+  detail: >-
+    API Terms of Use clause 15 binds partners to the Export Control Reform Act and
+    associated regulations; the API Services may not be exported or made
+    accessible from prohibited jurisdictions.
+  source: https://developer.hiscox.com/terms-use
+- regime: Listing and domicile
+  detail: Hiscox Ltd is headquartered in Bermuda and listed on the London Stock Exchange (LSE:HSX).
+  source: https://www.hiscoxgroup.com/
+not_conforming_gaps:
+- No published OAuth scope or permission model.
+- No published error/problem-details contract.
+- No published rate-limit or idempotency contract.
+- No discovery documents of any kind under /.well-known/.

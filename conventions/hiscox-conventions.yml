@@ -1,0 +1,99 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.hiscox.com/frequently-asked-questions
+docs:
+- https://developer.hiscox.com/frequently-asked-questions
+- https://developer.hiscox.com/terms-use
+summary: >-
+  Hiscox publishes only the coarse cross-cutting semantics of its partner APIs
+  on public pages: they are REST (explicitly not SOAP), they accept and return
+  both XML and JSON, they authenticate with OAuth 2.0 plus a partner-issued API
+  key, and they require TLS 1.2. Everything finer - pagination, idempotency,
+  request tracing, error envelope, rate limiting, versioning headers - is inside
+  the login-walled documentation and is recorded here as not-published rather
+  than guessed.
+architecture:
+  style: REST
+  soap: false
+  graphql: false
+  grpc: false
+  evidence: 'FAQ, API Calling section: "Are your APIs REST or SOAP? All of our APIs are REST"'
+content_negotiation:
+  formats:
+  - application/json
+  - application/xml
+  client_choice: true
+  evidence: >-
+    FAQ, API Calling section: "What request and response formats are supported?
+    We support both XML and JSON formats. So feel free to use whichever one is
+    most beneficial to you."
+  note: >-
+    Dual XML/JSON support is unusual for a modern REST API and is consistent with
+    an insurance carrier whose partner integrations sit alongside ACORD XML
+    messaging.
+authentication:
+  scheme: OAuth 2.0 bearer plus partner-issued API key
+  detail: authentication/hiscox-authentication.yml
+transport_security:
+  tls_minimum: '1.2'
+  tls_maximum: '1.2'
+  hsts_observed:
+    api.hiscox.com: max-age=86400
+  detail: security/hiscox-domain-security.yml
+gateway:
+  product: Apigee
+  host: api.hiscox.com
+  evidence: >-
+    Unrouted paths on api.hiscox.com return the Apigee proxy fault envelope
+    {"fault":{"faultstring":"Unable to identify proxy for host: https_vhost and
+    url: <path>","detail":{"errorcode":"messaging.adaptors.http.flow.ApplicationNotFound"}}},
+    which identifies the gateway product. No unauthenticated proxy is routable
+    and no public base URL is documented, so no baseURL is claimed in apis.yml.
+  confidence: high
+versioning:
+  scheme: version-in-product-name
+  evidence: >-
+    The public API catalog lists "Quote v4" as the product name; Eligibility and
+    Setup Payment carry no version marker. No URI-path, header or date-based
+    versioning policy is published.
+  policy_published: false
+idempotency:
+  supported: unknown
+  documented: false
+  note: >-
+    No idempotency key, safe-retry guidance or replay contract appears on any
+    public Hiscox page. Setup Payment initiates a payment, so an idempotency
+    contract almost certainly exists inside the gated documentation, but nothing
+    is published and no Idempotency pointer is wired.
+pagination:
+  documented: false
+  note: >-
+    Eligibility returns a list of states and products by profession, so a
+    collection response exists, but no pagination convention is published.
+request_tracing:
+  documented: false
+error_envelope:
+  documented: false
+  rfc9457: unknown
+  note: >-
+    No public error reference, status-code table or problem-details contract is
+    published, so errors/ is intentionally absent rather than fabricated.
+rate_limiting:
+  documented: false
+  note: >-
+    No published quota, throttle or rate-limit headers. The API Terms of Use
+    reserve the right to suspend or terminate access at Hiscox's sole discretion
+    rather than defining usage limits.
+support_expectations:
+  entitlement: none
+  evidence: >-
+    API Terms of Use, clause 7 (No Support; Updates): "This Agreement does not
+    entitle You to any support for the API Services."
+  note: >-
+    Practical support runs through the Partnership Manager and the developer
+    portal Support page rather than a contractual entitlement.
+cross_links:
+  authentication: authentication/hiscox-authentication.yml
+  lifecycle: lifecycle/hiscox-lifecycle.yml
+  sandbox: sandbox/hiscox-sandbox.yml
+  conformance: conformance/hiscox-conformance.yml

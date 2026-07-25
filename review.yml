@@ -284,3 +284,127 @@ actions:
     catalog as their humanURL and the login-walled documentation page as their
     APIReference. No OpenAPI pointer is present because no specification is
     publicly retrievable, and none was fabricated.
+enrichmentRound:
+  date: '2026-07-25'
+  method: search + probe
+  specFound: false
+  corrections:
+  - claim: >-
+      "no developer surface at all on the UK or London Market side of the group"
+    correction: >-
+      Partly wrong. There is no developer PORTAL on the London Market side, but
+      there is a shipped London Market API: Hiscox launched a Cargo API for small
+      cargo and stock throughput risks on 30 June 2025, with the risk rating
+      models, policy wordings and software coded in-house, 100% Hiscox Syndicate
+      33 security, a US$5m limit, and Price Forbes as the first broker partner
+      building the front end. It is now carried in apis.yml as a fourth API with
+      the press release as its humanURL. The pattern is the same as the US side -
+      real API, zero public contract - so the finding is refined, not reversed.
+    source: https://www.hiscoxgroup.com/news/press-releases/2025/30-06-25
+  newFindings:
+  - finding: API gateway product identified
+    detail: >-
+      api.hiscox.com returns an Apigee proxy fault on every path -
+      {"fault":{"faultstring":"Unable to identify proxy for host: https_vhost and
+      url: /","detail":{"errorcode":"messaging.adaptors.http.flow.ApplicationNotFound"}}}
+      - which identifies Apigee as the gateway. It negotiates TLSv1.2 (matching
+      the FAQ's TLS 1.2-only policy) and serves HSTS with max-age=86400, an order
+      of magnitude shorter than the 31536000 on the marketing hosts. No routable
+      unauthenticated proxy and no documented base URL, so no baseURL is claimed.
+  - finding: API key sits alongside OAuth 2.0
+    detail: >-
+      The FAQ documents OAuth 2.0, but the API Terms of Use clause 4 additionally
+      requires a partner-issued API Key - "Once registered, Hiscox makes the API
+      Services available to You electronically, requiring an API key for You to
+      access and use the API Services." The public auth model is therefore
+      two-factor at the credential level, not OAuth alone.
+    source: https://developer.hiscox.com/terms-use
+  - finding: No lifecycle guarantees, contractually
+    detail: >-
+      API Terms of Use clause 7 ("No Support; Updates") disclaims any support
+      entitlement and puts the cost of adapting to breaking Updates on the
+      partner; clause 12 reserves the right to "modify or discontinue,
+      temporarily or permanently, the API Services... with or without notice".
+      There is no status page, no changelog, no deprecation policy and no SLA -
+      only a standing Monday/Thursday 15:00-18:00 ET maintenance window.
+  - finding: Published partner contacts recovered
+    detail: >-
+      Both developer-portal contact addresses are Cloudflare-obfuscated in the
+      markup and decode to hiscox.partneroperations@hiscox.com (Support page,
+      "Partner With Us") and partnercontact@hiscox.com (API Terms of Use,
+      Inquiries). These are the real onboarding path in the absence of self-serve
+      signup.
+  - finding: One named security certification, no disclosure programme
+    detail: >-
+      Hiscox has been Cyber Essentials Plus accredited since 8 June 2018 (basic
+      Cyber Essentials self-certified since September 2016), retested annually by
+      external auditors - published first-party on the group blog. Against that,
+      no security.txt exists on any Hiscox host, no responsible-disclosure or
+      vulnerability-disclosure page could be found, and hackerone.com/hiscox and
+      bugcrowd.com/hiscox both 404. A carrier that sells cyber insurance and
+      publishes an annual Cyber Readiness Report has no coordinated vulnerability
+      disclosure surface of its own.
+    source: https://www.hiscoxgroup.com/news/blog/hiscox-gains-cyber-essentials-plus-accreditation
+  - finding: Email authentication is uneven across the estate
+    detail: >-
+      hiscox.co.uk enforces DMARC p=reject; hiscox.com is still p=none (monitor
+      only); hiscoxgroup.com publishes neither SPF nor DMARC. No domain has
+      DNSSEC or CAA records.
+  - finding: Zero SDK surface
+    detail: >-
+      npm, PyPI, RubyGems, NuGet, crates.io, Packagist and pkg.go.dev all return
+      no first-party Hiscox client library. The 18 public repos in the Hiscox
+      GitHub organization are entirely infrastructure - Puppet modules, Terraform
+      providers, PowerShell bootstrap scripts, Consul, Dynatrace, Infoblox,
+      Barracuda WAF - with no API definitions or client code.
+  - finding: Broker back-office integration via Acturis
+    detail: >-
+      The Hiscox UK broker extranet, launched 3 March 2023, is described as the
+      first full-cycle digital trading extranet built by an insurer that supports
+      integration into a broker's Acturis back office, with customer data
+      downloading straight into Acturis. Data exchange, not a public API.
+    source: https://www.hiscoxgroup.com/news/press-releases/2023/03-03-23
+  - finding: Insurtech acquisition aimed at broker technology
+    detail: >-
+      On 6 August 2025 Hiscox agreed to acquire Corix Insurance Services, LLC and
+      Vouch Insurance Company from Vouch, Inc., explicitly to gain "new
+      cutting-edge US broker technology to accelerate the ongoing digitization of
+      Hiscox's US broker platform", alongside a multi-year distribution deal.
+      Worth re-checking in a later round for a changed developer surface.
+    source: https://www.hiscoxgroup.com/news/press-releases/2025/06-08-25-1
+  specHuntRound2:
+    result: >-
+      Still no retrievable specification. Probed the gateway host root and
+      /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json,
+      /v4/openapi.json, /swagger/v1/swagger.json, /api-docs, /docs and /redoc on
+      api.hiscox.com (all Apigee 404 faults), plus /jsonapi, /api,
+      /sites/default/files/openapi.json and ?_format=json on the Drupal developer
+      portal (404/406). developer.hiscox.com/robots.txt returns a Disallow-all
+      body labelled "used in non-prod instances". No GraphQL, no MCP server, no
+      AsyncAPI, no /.well-known/ document of any kind on any host.
+  artifactsWritten:
+  - authentication/hiscox-authentication.yml
+  - conventions/hiscox-conventions.yml
+  - sandbox/hiscox-sandbox.yml
+  - lifecycle/hiscox-lifecycle.yml
+  - conformance/hiscox-conformance.yml
+  - security/hiscox-domain-security.yml
+  - well-known/hiscox-well-known.yml
+  - packages/hiscox-packages.yml
+  - llms/hiscox-llms.txt
+  artifactsIntentionallyAbsent:
+    openapi: no publicly retrievable specification
+    asyncapi: no event, streaming or webhook surface published
+    errors: no public error reference to derive or search
+    scopes: OAuth 2.0 documented but no scope or permission reference published
+    mcp: no MCP server, and no OpenAPI to derive candidate tools from
+    skills: no OpenAPI to ground operationIds in
+    overlays: no OpenAPI to extend
+    grpc: no published .proto
+    cli: no first-party CLI
+    components: no embedded UI components
+    changelog: no dated API changelog (milestones recorded in lifecycle/ instead)
+    dataModel: no OpenAPI to derive an entity graph from
+    declineCodes: no published decline-code reference
+    vulnerabilityDisclosure: no security.txt, disclosure page or bug bounty found
+    trustCenter: no trust or compliance centre published

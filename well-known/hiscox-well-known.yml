@@ -1,0 +1,61 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of the Hiscox developer, gateway and corporate hosts
+summary: >-
+  No /.well-known/ discovery document of any kind is published on any Hiscox
+  host. Every path probed returned HTTP 404, including on the Apigee-fronted
+  API gateway host api.hiscox.com, which returns a JSON proxy fault rather than
+  a discovery document. Hiscox documents OAuth 2.0 as its API authentication
+  protocol on the public developer FAQ, but publishes no RFC 8414
+  authorization-server metadata, no OIDC discovery document, no RFC 9116
+  security.txt and no RFC 9727 api-catalog. Absence is the recorded finding; no
+  WellKnown or SecurityTxt pointer is wired because nothing is published.
+hosts:
+- host: https://developer.hiscox.com
+  role: developer portal (Drupal, hiscox_developer_radix6 theme)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /security.txt
+    status: 404
+- host: https://api.hiscox.com
+  role: >-
+    API gateway. Resolves and serves JSON, but every path returns an Apigee
+    proxy fault - {"fault":{"faultstring":"Unable to identify proxy for host:
+    https_vhost and url: /","detail":{"errorcode":"messaging.adaptors.http.flow.ApplicationNotFound"}}}
+    - which identifies the gateway product without exposing any routable
+    unauthenticated proxy.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://www.hiscox.com
+  role: US retail website
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://www.hiscox.co.uk
+  role: UK retail website
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://www.hiscoxgroup.com
+  role: group corporate website
+  documents:
+  - path: /.well-known/security.txt
+    status: 404

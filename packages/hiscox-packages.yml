@@ -1,0 +1,55 @@
+generated: '2026-07-25'
+method: searched
+source: registry searches plus the Hiscox GitHub organization
+summary: >-
+  Hiscox publishes no first-party client libraries or SDKs in any public package
+  registry, and its GitHub organization contains no API client code. Partners
+  integrate against the raw REST endpoints using the Swagger definition issued
+  inside the gated SDBX sandbox. No SDKs pointer is wired in apis.yml because
+  none exists.
+packages: []
+registries_probed:
+- registry: npm
+  query: hiscox
+  results: 0
+- registry: pypi
+  query: hiscox
+  results: 0
+  note: https://pypi.org/pypi/hiscox/json returns 404
+- registry: rubygems
+  query: hiscox
+  results: 0
+- registry: nuget
+  query: hiscox
+  results: 0
+- registry: crates.io
+  query: hiscox
+  results: 0
+- registry: packagist
+  query: hiscox
+  results: 0
+  note: >-
+    Matches exist but are all third-party RuneScape "hiscores" libraries, not
+    Hiscox insurance clients.
+- registry: pkg.go.dev
+  query: hiscox
+  results: 0
+source_code:
+  github_organization: https://github.com/hiscox
+  public_repositories: 18
+  first_party: true
+  api_clients: 0
+  character: >-
+    Infrastructure and platform engineering only - Puppet modules
+    (Dynatrace-OneAgent-Puppet, azuremetadata, puppet-gemsource, control-repo,
+    tragiccode-azure_key_vault, puppetlabs-docker), Terraform providers and
+    modules (terraform-provider-azurerm, terraform-provider-infoblox,
+    terraform-azure_data_disks, terratestutilities), Windows/PowerShell bootstrap
+    and cleanup scripts, consul_cluster, barracudawaf, logstash-output-http,
+    local_security_policy, nanoserver-ruby, windows_storage. Several are forks of
+    upstream community modules. No API definitions, client libraries, sample
+    integrations or code samples for the Eligibility, Quote or Setup Payment APIs.
+  note: >-
+    The organization is a useful signal of the internal stack - Azure, Puppet,
+    Terraform, Consul, Dynatrace, Infoblox, Barracuda WAF - but it is not a
+    developer-facing surface.
