@@ -35,6 +35,23 @@ tags:
 - Reinsurance
 - Lloyd's of London
 - Small Business Insurance
+- Quotes
+- ACORD
+- Carrier
+- Cargo
+- Marine
+- Payments
+- API Gateway
+tags_raw:
+- Insurance
+- United Kingdom
+- Property and Casualty
+- Specialty Insurance
+- Cyber Insurance
+- Underwriting
+- Reinsurance
+- Lloyd's of London
+- Small Business Insurance
 - Quote
 - ACORD
 - Carrier
@@ -71,6 +88,11 @@ apis:
     behind the partner login.
   humanURL: https://developer.hiscox.com/apis
   tags:
+  - Quotes
+  - Rating
+  - Property and Casualty
+  - Cyber Insurance
+  tags_raw:
   - Quote
   - Rating
   - Property and Casualty
@@ -108,6 +130,14 @@ apis:
     through a broker partnership.
   humanURL: https://www.hiscoxgroup.com/news/press-releases/2025/30-06-25
   tags:
+  - Cargo
+  - Marine
+  - Stock Throughput
+  - Quotes
+  - Bind
+  - London Market
+  - Lloyd's of London
+  tags_raw:
   - Cargo
   - Marine
   - Stock Throughput
