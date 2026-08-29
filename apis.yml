@@ -24,6 +24,17 @@ description: 'Hiscox Ltd is a diversified international specialist insurance and
   digital accounting and invoicing went live in the UK retail insurance market with Hiscox as the receiving
   insurer, responding in real time to Howden''s digital invoices through the ACORD Solutions Group ADEPT
   (ACORD Data Exchange Platform & Translator) receiver portal.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
