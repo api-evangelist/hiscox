@@ -114,7 +114,7 @@ apis:
   humanURL: https://developer.hiscox.com/apis
   tags:
   - Quotes
-  - Rating
+  - Ratings
   - Property and Casualty
   - Cyber Insurance
   tags_raw:
